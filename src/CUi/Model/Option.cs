@@ -20,7 +20,7 @@ namespace CUi.Model
         /// Die Zeichenfolge, die auf der Benutzeroberfläche für einen bestimmten Vorschlag angezeigt wird.
         /// </summary>
         public string Description { get; set; }
-        public Action<IEnumerable<Argument>> Args { get; set; }
+        public Func<IEnumerable<Argument>> Args { get; set; }
         /// <summary>
         /// Zeigt an, ob eine Option persistent ist, d. h., dass sie weiterhin als Option für alle untergeordneten Befehle verfügbar ist.
         /// </summary>
@@ -43,11 +43,11 @@ namespace CUi.Model
         /// <summary>
         /// Gibt an, ob sich eine Option mit anderen Optionen gegenseitig ausschließt.
         /// </summary>
-        public string[] ExclusiveOn { get; set; }
+        public IList<string> ExclusiveOn { get; set; }
         /// <summary>
         /// Gibt an, ob eine Option von anderen Optionen abhängt.
         /// </summary>
-        public string[] DependsOn { get; set; }
+        public IList<string> DependsOn { get; set; }
         
 
     }

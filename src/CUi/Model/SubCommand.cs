@@ -10,9 +10,9 @@ namespace CUi.Model
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public Action<IEnumerable<Argument>> Args { get; set; }
-        public Action<IEnumerable<SubCommand>> SubCommands { get; set; }
-        public Action<IEnumerable<Option>> Options { get; set; }
+        public Func<IEnumerable<Argument>> Args { get; set; }
+        public Func<IEnumerable<SubCommand>> SubCommands { get; set; }
+        public Func<IEnumerable<Option>> Options { get; set; }
         public bool RequiresSubcommand { get; set; }
     }
 }
