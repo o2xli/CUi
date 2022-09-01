@@ -1,4 +1,5 @@
 ﻿using Spectre.Console;
+using Spectre.Console.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,11 +39,26 @@ namespace CUi.Components
                 string title = options.SelectFile ? options.TextSelectFile : options.TextSelectFolder;
                 var selectionPromptResult = AnsiConsole.Prompt(
                     new SelectionPrompt<string>()
-                        .Title($"[green]{title}:[/]")
+                        //.Title($"[green]{title}:[/]")
                         .PageSize(options.PageSize)
                         .MoreChoicesText($"[grey]{options.TextMoreChoices}[/]")
                         .AddChoices(choices.Keys)
                     );
+
+
+
+                //var p = new MultiSelectionPrompt<string>()
+                //        .NotRequired()
+                //        .PageSize(options.PageSize)
+                //        .MoreChoicesText("[grey](Move up and down to reveal more)[/]")
+                //        .InstructionsText("[grey](Press [blue]<space>[/] to toggle a fruit, [green]<enter>[/] to accept)[/]")
+
+                //        //new SelectionPrompt<string>()
+                //        //    //.Title($"[green]{title}:[/]")
+                //        //    .PageSize(options.PageSize)
+                //        //    .MoreChoicesText($"[grey]{options.TextMoreChoices}[/]")
+                //        .AddChoices(choices.Keys);
+                //p.
 
                 var selectedItemPath = choices[selectionPromptResult];
                 if (selectedItemPath == "/////")
@@ -85,7 +101,7 @@ namespace CUi.Components
             AnsiConsole.Write(rule);
 
             AnsiConsole.WriteLine();
-            AnsiConsole.Markup($"[b][Yellow]{options.TextCurrentFolder}: [/][/]");
+            //AnsiConsole.Markup($"[b][Yellow]{options.TextCurrentFolder}: [/][/]");
             var path = new TextPath(actualFolder.ToString());
             path.RootStyle = new Style(foreground: Color.Green);
             path.SeparatorStyle = new Style(foreground: Color.Green);
@@ -98,7 +114,11 @@ namespace CUi.Components
         private Dictionary<string, string> GetChoices(string actualFolder)
         {
             Dictionary<string, string> choices = new Dictionary<string, string>();
-
+            
+            if (new DirectoryInfo(actualFolder)?.Parent != null)
+            {
+                choices.Add($"[green]{GetIcon(":upwards_button:")} {options.TextLevelUp}[/]", new DirectoryInfo(actualFolder).Parent.FullName);
+            }
             if (isOSWindows)
             {
                 choices.Add($"[green]{GetIcon(":computer_disk:")} {options.TextSelectDrive}[/]", "/////");
@@ -111,10 +131,7 @@ namespace CUi.Components
             {
                 choices.Add($"[green]{GetIcon(":plus:")} {options.TextCreateNew}[/]", "///new");
             }
-            if (new DirectoryInfo(actualFolder)?.Parent != null)
-            {
-                choices.Add($"[green]{GetIcon(":upwards_button:")} {options.TextLevelUp}[/]", new DirectoryInfo(actualFolder).Parent.FullName);
-            }
+            
             foreach (var di in Directory.GetDirectories(Directory.GetCurrentDirectory()).Select(d => new DirectoryInfo(d)))
             {
                 choices.Add($"{GetIcon(":file_folder:")} {di.Name}", di.FullName);

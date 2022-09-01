@@ -10,7 +10,7 @@ AnsiConsole.Write(
 
 
 
-var x = new FileDialog(new FileDialog.Options { Filter="*.txt"});
+var x = new FileDialog(new FileDialog.Options { SelectFile = false});
 x.Show();
 
 //if (AnsiConsole.Confirm("Run prompt example?"))
