@@ -17,7 +17,6 @@ namespace CUi.Commands
         public Copy(Context ctx)
         {
             this.Name = "Copy";
-            //this.Scheme = "copy "
             this.Description = "Copy files and directories";
             this.Args = () =>
             {                

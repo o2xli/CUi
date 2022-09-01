@@ -1,4 +1,6 @@
-﻿using Spectre.Console;
+﻿using CUi.Components;
+using Spectre.Console;
+System.Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 var font = FigletFont.Load("starwars.flf");
 AnsiConsole.Write(
@@ -7,6 +9,9 @@ AnsiConsole.Write(
         .Color(Color.DodgerBlue3));
 
 
+
+var x = new FileDialog(new FileDialog.Options { Filter="*.txt"});
+x.Show();
 
 //if (AnsiConsole.Confirm("Run prompt example?"))
 //{
