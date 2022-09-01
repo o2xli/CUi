@@ -105,7 +105,7 @@ namespace CUi.Components
             }
             if (!options.SelectFile)
             {
-                choices.Add($"{GetIcon(":ok_button:")} [green]{options.TextSelectActual}[/]", Directory.GetCurrentDirectory());
+                choices.Add($"{GetIcon(":ok_button:")} [green]{options.TextSelectCurrent}[/]", Directory.GetCurrentDirectory());
             }
             if (options.CanCreateFolder)
             {
@@ -177,7 +177,7 @@ namespace CUi.Components
             public string TextSelectFile { get; init; } = "Select File";
             public string TextSelectFolder { get; init; } = "Select Folder";
             public string TextSelectDrive { get; init; } = "Select Drive";
-            public string TextSelectActual { get; init; } = "Select Actual Folder";
+            public string TextSelectCurrent { get; init; } = "Select current Folder";
         }
     }
 }
